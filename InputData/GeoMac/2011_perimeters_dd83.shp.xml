@@ -1,0 +1,181 @@
+<metadata>
+	<idinfo>
+		<citation>
+			<citeinfo>
+				<origin>Perimeter data is derived from data produced by GIS specialists working on each incident.</origin>
+				<pubdate>Unpublished Material</pubdate>
+				<title>PERIMETERS_DD83</title>
+				<geoform>vector digital data</geoform>
+				<ftname Sync="TRUE">baselayer.BL_VECTOR.GEOMAC_PERIMETERS_DD83</ftname><onlink Sync="TRUE">Server=sql_dev; Service=sde:sqlserver:sql_dev; Database=baselayer; User=bl_vector; Version=sde.DEFAULT</onlink></citeinfo>
+		</citation>
+		<descript>
+			<abstract>The Geospatial Multi-Agency Coordination Group, or GeoMAC, is an internet-based mapping tool originally designed for fire managers to access online maps of current fire locations and perimeters in the conterminous 48 states and Alaska. Perimeters are submitted to GeoMAC by field offices and then posted to an FTP site for downloading. This file contains all fire perimeters that were submitted to GeoMAC by field offices for the current year. The projection is geographic and the datum is NAD83.</abstract>
+			<purpose>This layer displays wildfire perimeter data as they are submitted by field offices.</purpose>
+			<langdata Sync="TRUE">en</langdata></descript>
+		<timeperd>
+			<timeinfo>
+				<sngdate>
+					<caldate>unknown</caldate>
+				</sngdate>
+			</timeinfo>
+			<current>ground condition</current>
+		</timeperd>
+		<status>
+			<progress>In work</progress>
+			<update>As needed</update>
+		</status>
+		<spdom>
+			<bounding>
+				<westbc>
+-164.370754</westbc>
+				<eastbc>
+-80.894983</eastbc>
+				<northbc>
+68.359367</northbc>
+				<southbc>
+25.863797</southbc>
+			</bounding>
+		</spdom>
+		<keywords>
+			<theme>
+				<themekey>wildfire</themekey>
+				<themekey>perimeter</themekey>
+				<themekt>REQUIRED: Reference to a formally registered thesaurus or a similar authoritative source of theme keywords.</themekt></theme>
+		</keywords>
+		<accconst>None</accconst>
+		<useconst>None</useconst>
+		<ptcontac>
+			<cntinfo>
+				<cntperp>
+					<cntper>Elizabeth Lile</cntper>
+					<cntorg>USGS</cntorg>
+				</cntperp>
+				<cntvoice>303-202-4326</cntvoice>
+				<cntemail>ellile@usgs.gov</cntemail>
+			</cntinfo>
+		</ptcontac>
+		<native>Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 2; ESRI ArcCatalog 9.2.4.1420</native>
+		<natvform Sync="TRUE">SDE Feature Class</natvform></idinfo>
+	<dataqual>
+		<attracc>
+			<attraccr>Perimeter data displayed in and delivered by the Geomac application is not the final or official perimeter for any incident and is provided for informational purposes only. The final official perimeter should be obtained from the host unit which can be determined by looking at the Unit Id for any specific fire. The host unit is responsible for producing official and final perimeters for all incidents in their jurisdiction.</attraccr>
+		</attracc>
+		<posacc>
+			<horizpa>
+				<horizpar>Files only contain perimeter data as they are submitted by field offices. Files do not contain all fires. This data is not the authoritative fire perimeter data and should not be used as such.</horizpar>
+			</horizpa>
+		</posacc>
+		<lineage>
+			<procstep>
+				<procdesc>Perimeter data provided by the Geomac site is derived from data produced by GIS specialists working on each incident. Shape file perimeters are received containing a range of attributes. The shape file is processed to contain consistent field naming and attribution: TIME, COMMENTS, DATE UPLOADED, YEAR, ACTIVE are added as appropriate. AGENCY, UNIT_ID, FIRE NAME OR COMPLEX NAME, FIRE NUMBER, (according to FIRECODE), and FIRE name if part of a complex are added. If not originally projected, the shape file is projected so that ACRES can be calculated using a Visual Basic tool. It is then reprojected to geographic decimal degrees NAD83 and uploaded into the existing perimeter_dd83 sde layer for that year.</procdesc>
+				<proccont>
+					<cntinfo>
+						<cntperp>
+							<cntper>Sandra Walters</cntper>
+							<cntorg>USGS RMGSC</cntorg>
+						</cntperp>
+						<cntpos>Cartographer</cntpos>
+						<cntvoice>303-202-4449</cntvoice>
+						<cntemail>spwalters@usgs.gov</cntemail>
+					</cntinfo>
+				</proccont>
+			</procstep>
+			<procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">Server=igskbtcngs083; Service=5151; Database=baselayer; User=bl_vector; Version=sde.DEFAULT</srcused><date Sync="TRUE">20080313</date><time Sync="TRUE">06590300</time></procstep><procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">Server=igskbtcngs084; Service=5151; Database=baselayer; User=bl_vector; Version=sde.DEFAULT</srcused><date Sync="TRUE">20080321</date><time Sync="TRUE">06561800</time></procstep><procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">Server=igskbtcngs083; Service=5151; Database=baselayer; User=bl_vector; Version=sde.DEFAULT</srcused><date Sync="TRUE">20080321</date><time Sync="TRUE">10482700</time></procstep><procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">Server=igskbtcngs084; Service=5151; Database=baselayer; User=bl_vector; Version=sde.DEFAULT</srcused><date Sync="TRUE">20080626</date><time Sync="TRUE">13265700</time></procstep><procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">Server=igskbtcngs083; Service=5151; Database=baselayer; User=bl_vector; Version=sde.DEFAULT</srcused><date Sync="TRUE">20080626</date><time Sync="TRUE">14551100</time></procstep><procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">Server=igskbtcngs107; Service=5151; Database=baselayer; User=bl_vector; Version=sde.DEFAULT</srcused><procdate Sync="TRUE">20090429</procdate><proctime Sync="TRUE">10381300</proctime></procstep><procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">Server=sql_dev; Service=sde:sqlserver:sql_dev; Database=baselayer; User=bl_vector; Version=sde.DEFAULT</srcused><procdate Sync="TRUE">20120119</procdate><proctime Sync="TRUE">09432900</proctime></procstep></lineage>
+	</dataqual>
+	<spdoinfo>
+		<direct>Vector</direct>
+		<ptvctinf><esriterm><efeatyp Sync="TRUE">Simple</efeatyp><efeageom code="4" Sync="TRUE"></efeageom><esritopo Sync="TRUE">FALSE</esritopo><efeacnt Sync="TRUE">0</efeacnt><spindex Sync="TRUE">FALSE</spindex><linrefer Sync="TRUE">FALSE</linrefer></esriterm></ptvctinf></spdoinfo>
+	<spref>
+		<horizsys>
+			<geograph>
+				<latres>0.000000</latres>
+				<longres>0.000000</longres>
+				<geogunit>Decimal degrees</geogunit>
+			</geograph>
+			<geodetic>
+				<horizdn>North American Datum of 1983</horizdn>
+				<ellips>Geodetic Reference System 80</ellips>
+				<semiaxis>6378137.000000</semiaxis>
+				<denflat>298.257222</denflat>
+			</geodetic>
+			<cordsysn><geogcsn Sync="TRUE">GCS_North_American_1983</geogcsn></cordsysn></horizsys>
+		<vertdef>
+			<altsys>
+				<altres>1.000000</altres>
+				<altenc>Explicit elevation coordinate included with horizontal coordinates</altenc>
+			</altsys>
+		</vertdef>
+	</spref>
+	<eainfo>
+		<detailed Name="US_HIST_FIRE_PERIM_2011_DD83">
+			<enttyp>
+				<enttypl>
+GEOMAC.PERIMETERS_DD83</enttypl>
+				<enttypt Sync="TRUE">Feature Class</enttypt><enttypc Sync="TRUE">0</enttypc></enttyp>
+			<attr>
+				<attrlabl>DATE_</attrlabl>
+				<attalias Sync="TRUE">FID</attalias><attrtype Sync="TRUE">OID</attrtype><attwidth Sync="TRUE">4</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Internal feature number.</attrdef><attrdefs Sync="TRUE">ESRI</attrdefs><attrdomv><udom Sync="TRUE">Sequential unique whole numbers that are automatically generated.</udom></attrdomv></attr>
+			<attr>
+				<attrlabl>FIRE</attrlabl>
+				<attalias Sync="TRUE">fire</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">50</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr>
+			<attr>
+				<attrlabl>ACRES</attrlabl>
+				<attalias Sync="TRUE">acres</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">18</atprecis><attscale Sync="TRUE">8</attscale></attr>
+			<attr>
+				<attrlabl>SHAPE</attrlabl>
+				<attrdef>Feature geometry.</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Coordinates defining the features.</udom>
+				</attrdomv>
+				<attalias Sync="TRUE">agency</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">15</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr>
+			<attr>
+				<attrlabl>AGENCY</attrlabl>
+				<attalias Sync="TRUE">comments</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">254</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr>
+			<attr>
+				<attrlabl>COMMENTS</attrlabl>
+				<attalias Sync="TRUE">active</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">1</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr>
+			<attr>
+				<attrlabl>ACTIVE</attrlabl>
+				<attalias Sync="TRUE">unit_id</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">7</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr>
+			<attr>
+				<attrlabl>UNIT_ID</attrlabl>
+				<attalias Sync="TRUE">fire_name</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">50</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr>
+			<attr>
+				<attrlabl>FIRE_NAME</attrlabl>
+				<attalias Sync="TRUE">Shape</attalias><attrtype Sync="TRUE">Geometry</attrtype><attwidth Sync="TRUE">0</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Feature geometry.</attrdef><attrdefs Sync="TRUE">ESRI</attrdefs><attrdomv><udom Sync="TRUE">Coordinates defining the features.</udom></attrdomv></attr>
+			<attr><attrlabl Sync="TRUE">Shape</attrlabl><attalias Sync="TRUE">fire_num</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">8</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Feature geometry.</attrdef><attrdefs Sync="TRUE">ESRI</attrdefs><attrdomv><udom Sync="TRUE">Coordinates defining the features.</udom></attrdomv></attr><attr>
+				<attrlabl>FIRE_NUM</attrlabl>
+				<attalias Sync="TRUE">time_</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr>
+			<attr><attrlabl Sync="TRUE">TIME_</attrlabl><attalias Sync="TRUE">year_</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">4</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">YEAR_</attrlabl><attalias Sync="TRUE">date_</attalias><attrtype Sync="TRUE">Date</attrtype><attwidth Sync="TRUE">8</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">load_date</attrlabl><attalias Sync="TRUE">load_date</attalias><attrtype Sync="TRUE">Date</attrtype><attwidth Sync="TRUE">8</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">inciweb_id</attrlabl><attalias Sync="TRUE">inciweb_id</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">st_area_sh</attrlabl><attalias Sync="TRUE">st_area_sh</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">st_length_</attrlabl><attalias Sync="TRUE">st_length_</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr></detailed>
+	</eainfo>
+	<distinfo>
+		<resdesc>Downloadable Data</resdesc>
+	</distinfo>
+	<metainfo>
+		<metd>20080109</metd>
+		<metc>
+			<cntinfo>
+				<cntperp>
+					<cntper>Sandra Walters</cntper>
+					<cntorg>USGS</cntorg>
+				</cntperp>
+				<cntaddr>
+					<addrtype>mailing address</addrtype>
+					<address>Box 25046, MS 516</address>
+					<city>Denver</city>
+					<state>CO</state>
+					<postal>80225</postal>
+				</cntaddr>
+				<cntvoice>303-202-4449</cntvoice>
+				<cntpos>Cartographer</cntpos><cntemail>spwalters@usgs.gov</cntemail><cntorgp><cntper>REQUIRED: The person responsible for the metadata information.</cntper><cntorg>REQUIRED: The organization responsible for the metadata information.</cntorg></cntorgp></cntinfo>
+		</metc>
+		<metstdn>FGDC Content Standards for Digital Geospatial Metadata</metstdn>
+		<metstdv>FGDC-STD-001-1998</metstdv>
+		<mettc>local time</mettc>
+		<metextns>
+			<onlink>http://www.esri.com/metadata/esriprof80.html</onlink>
+			<metprof>ESRI Metadata Profile</metprof>
+		</metextns>
+		<langmeta Sync="TRUE">en</langmeta></metainfo>
+	<Esri><CreaDate>20120411</CreaDate><CreaTime>11131900</CreaTime><SyncOnce>FALSE</SyncOnce><ModDate>20130116</ModDate><ModTime>16221200</ModTime><SyncDate>20130116</SyncDate><SyncTime>16221200</SyncTime><DataProperties><lineage><Process Name="FeatureClassToFeatureClass_2" ToolSource="C:\Program Files (x86)\ArcGIS\ArcToolbox\Toolboxes\Conversion Tools.tbx\FeatureClassToFeatureClass" Date="20080313" Time="064800">FeatureClassToFeatureClass "Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83" D:\Research\geomac\peirmeters.mdb PERIMETERS_DD83_new2 # "ACRES ACRES true true false 8 Double 3 18 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,ACRES,-1,-1;AGENCY AGENCY true true false 15 Text 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,AGENCY,-1,-1;TIME_ TIME_ true true false 4 Text 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,TIME,-1,-1;COMMENTS COMMENTS true true false 254 Text 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,COMMENTS,-1,-1;DATE_UPLOADED DATE_UPLOADED true true false 36 Date 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,DATE_UPLOADED,-1,-1;YEAR_ YEAR_ true true false 4 Text 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,YEAR,-1,-1;ACTIVE ACTIVE true true false 1 Text 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,ACTIVE,-1,-1;UNIT_ID UNIT_ID true true false 7 Text 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,UNIT_ID,-1,-1;FIRE_NAME FIRE_NAME true true false 50 Text 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,FIRE_NAME,-1,-1;FIRE_NUM FIRE_NUM true true false 8 Text 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,FIRE_NUM,-1,-1;DATE_ DATE_ true true false 36 Date 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,DATE_,-1,-1;FIRE FIRE true true false 50 Text 0 0 ,First,#,Database Connections\Connection to igskbtcnus041.sde\GEOMAC.PERIMETERS_DD83,FIRE,-1,-1" # D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2</Process><Process Name="FeatureClassToFeatureClass_1" ToolSource="C:\Program Files (x86)\ArcGIS\ArcToolbox\Toolboxes\Conversion Tools.tbx\FeatureClassToFeatureClass" Date="20080313" Time="065713">FeatureClassToFeatureClass D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2 "Database Connections\bl_vect_083.sde" GEOMAC_PERIMETERS_DD83 # "ACRES ACRES true true false 8 Double 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,ACRES,-1,-1;AGENCY AGENCY true true false 15 Text 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,AGENCY,-1,-1;TIME_ TIME_ true true false 4 Text 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,TIME_,-1,-1;COMMENTS COMMENTS true true false 254 Text 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,COMMENTS,-1,-1;DATE_UPLOADED DATE_UPLOADED true true false 8 Date 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,DATE_UPLOADED,-1,-1;YEAR_ YEAR_ true true false 4 Text 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,YEAR_,-1,-1;ACTIVE ACTIVE true true false 1 Text 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,ACTIVE,-1,-1;UNIT_ID UNIT_ID true true false 7 Text 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,UNIT_ID,-1,-1;FIRE_NAME FIRE_NAME true true false 50 Text 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,FIRE_NAME,-1,-1;FIRE_NUM FIRE_NUM true true false 8 Text 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,FIRE_NUM,-1,-1;DATE_ DATE_ true true false 8 Date 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,DATE_,-1,-1;FIRE FIRE true true false 50 Text 0 0 ,First,#,D:\Research\geomac\peirmeters.mdb\PERIMETERS_DD83_new2,FIRE,-1,-1" BL_VECTOR "Database Connections\bl_vect_083.sde\baselayer.BL_VECTOR.GEOMAC_PERIMETERS_DD83"</Process><Process ToolSource="C:\ArcGIS\Desktop10.0\ArcToolbox\Toolboxes\Data Management Tools.tbx\ChangePrivileges" Date="20120119" Time="103408">ChangePrivileges 'Database Connections\sql_dev on 143 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2011_DD83' perimeters_rw GRANT GRANT</Process><Process ToolSource="C:\ArcGIS\Desktop10.0\ArcToolbox\Toolboxes\Data Management Tools.tbx\ChangePrivileges" Date="20120224" Time="152708">ChangePrivileges 'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2000_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2001_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2002_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2003_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2004_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2005_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2006_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2007_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2008_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2009_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2010_DD83';'Database Connections\sql_prod2 on 142 as bl_vector.sde\baselayer.BL_VECTOR.US_HIST_FIRE_PERIM_2011_DD83' perimeters_rw GRANT GRANT</Process><Process ToolSource="c:\arcgis\desktop10.0\ArcToolbox\Toolboxes\Data Management Tools.tbx\CopyFeatures" Date="20130116" Time="162218">CopyFeatures "Database Connections\sql_dev on igskbtcngs146 as web_apps_rw.sde\baselayer.web_apps_rw.US_HIST_FIRE_PERIM_2011_DD83" D:\a1_1load\US_HIST_FIRE_PERIM_2011_DD83.shp # 0 0 0</Process></lineage><itemProps><itemLocation><linkage Sync="TRUE">file://\\IGSKAECGWS86102\d\a1_1load\US_HIST_FIRE_PERIM_2011_DD83.shp</linkage><protocol Sync="TRUE">Local Area Network</protocol></itemLocation><itemName Sync="TRUE">US_HIST_FIRE_PERIM_2011_DD83</itemName><imsContentType Sync="TRUE">002</imsContentType><itemSize Sync="TRUE">0.000</itemSize></itemProps><coordRef><type Sync="TRUE">Geographic</type><geogcsn Sync="TRUE">GCS_North_American_1983</geogcsn><csUnits Sync="TRUE">Angular Unit: Degree (0.017453)</csUnits><peXml Sync="TRUE">&lt;GeographicCoordinateSystem xsi:type='typens:GeographicCoordinateSystem' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:typens='http://www.esri.com/schemas/ArcGIS/10.0'&gt;&lt;WKT&gt;GEOGCS[&amp;quot;GCS_North_American_1983&amp;quot;,DATUM[&amp;quot;D_North_American_1983&amp;quot;,SPHEROID[&amp;quot;GRS_1980&amp;quot;,6378137.0,298.257222101]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0.0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433],AUTHORITY[&amp;quot;EPSG&amp;quot;,4269]]&lt;/WKT&gt;&lt;XOrigin&gt;-399.99999999999989&lt;/XOrigin&gt;&lt;YOrigin&gt;-399.99999999999989&lt;/YOrigin&gt;&lt;XYScale&gt;11258999068426.24&lt;/XYScale&gt;&lt;ZOrigin&gt;-100000&lt;/ZOrigin&gt;&lt;ZScale&gt;10000&lt;/ZScale&gt;&lt;MOrigin&gt;-100000&lt;/MOrigin&gt;&lt;MScale&gt;10000&lt;/MScale&gt;&lt;XYTolerance&gt;8.9831528411952117e-009&lt;/XYTolerance&gt;&lt;ZTolerance&gt;0.001&lt;/ZTolerance&gt;&lt;MTolerance&gt;0.001&lt;/MTolerance&gt;&lt;HighPrecision&gt;true&lt;/HighPrecision&gt;&lt;LeftLongitude&gt;-180&lt;/LeftLongitude&gt;&lt;WKID&gt;4269&lt;/WKID&gt;&lt;/GeographicCoordinateSystem&gt;</peXml></coordRef></DataProperties><ArcGISFormat>1.0</ArcGISFormat><ArcGISstyle>FGDC CSDGM Metadata</ArcGISstyle></Esri><mdDateSt Sync="TRUE">20130116</mdDateSt><dataIdInfo><envirDesc Sync="TRUE">Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; ESRI ArcGIS 10.0.4.4000</envirDesc><dataLang><languageCode Sync="TRUE" value="eng"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></dataLang><idCitation><resTitle Sync="TRUE">US_HIST_FIRE_PERIM_2011_DD83</resTitle><presForm><PresFormCd Sync="TRUE" value="005"></PresFormCd></presForm></idCitation><spatRpType><SpatRepTypCd Sync="TRUE" value="001"></SpatRepTypCd></spatRpType></dataIdInfo><mdLang><languageCode Sync="TRUE" value="eng"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></mdLang><mdStanName Sync="TRUE">ISO 19115 Geographic Information - Metadata</mdStanName><mdStanVer Sync="TRUE">DIS_ESRI1.0</mdStanVer><mdChar><CharSetCd Sync="TRUE" value="004"></CharSetCd></mdChar><mdHrLv><ScopeCd Sync="TRUE" value="005"></ScopeCd></mdHrLv><mdHrLvName Sync="TRUE">dataset</mdHrLvName><distInfo><distributor><distorTran><onLineSrc><orDesc Sync="TRUE">002</orDesc><linkage Sync="TRUE">Server=sql_dev; Service=sde:sqlserver:sql_dev; Database=baselayer; User=bl_vector; Version=sde.DEFAULT</linkage><protocol Sync="TRUE">ArcSDE Connection</protocol></onLineSrc></distorTran><distorFormat><formatName Sync="TRUE">SDE Feature Class</formatName></distorFormat></distributor><distFormat><formatName Sync="TRUE">Shapefile</formatName></distFormat><distTranOps><transSize Sync="TRUE">0.000</transSize></distTranOps></distInfo><refSysInfo><RefSystem><refSysID><identCode Sync="TRUE" value="4269">GCS_North_American_1983</identCode><idCodeSpace Sync="TRUE">EPSG</idCodeSpace><idVersion Sync="TRUE">7.4.1</idVersion></refSysID></RefSystem></refSysInfo><spatRepInfo><VectSpatRep><geometObjs Name="US_HIST_FIRE_PERIM_2011_DD83"><geoObjTyp><GeoObjTypCd value="002" Sync="TRUE"></GeoObjTypCd></geoObjTyp><geoObjCnt Sync="TRUE">0</geoObjCnt></geometObjs><topLvl><TopoLevCd value="001" Sync="TRUE"></TopoLevCd></topLvl></VectSpatRep></spatRepInfo></metadata>
