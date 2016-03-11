@@ -6,7 +6,7 @@
 # Unify sf_id for this Tranche
 make_sf_id <- function(SPDF, ds, Tranche) {
   pref <- paste0("T", as.character(Tranche), "_", as.character(ds))
-  newSPDF <- spChFIDs(SPDF, paste(pref, SPDF$sf_id, sep="_"))
+  newSPDF <- sp::spChFIDs(SPDF, paste(pref, SPDF$sf_id, sep="_"))
 }
 
 
