@@ -17,12 +17,14 @@
 InputTranche1 <- function(config) {
 
   # Get the config info for this data source
-  source(config)
+  source(config, local = TRUE)
 
-  # load shapefile, find and filter bad shapes
-  raw.shapes <- rgdal::readOGR(inpath, inname)
-  bad.geoms <- rgeos::gIsValid(raw.shapes, byid=TRUE)
-  shapes <- raw.shapes[bad.geoms==TRUE,]
+  # load shapefile, find and clean bad shapes
+  shapes <- rgdal::readOGR(inpath, inname)
+  good.geoms <- rgeos::gIsValid(shapes, byid=TRUE)
+  if (any(good.geoms==FALSE)) {
+    shapes <- cleangeo::clgeo_Clean(shapes)
+  }
 
   # Add the SF official fields
   # ID, startdate, enddate, type, source
@@ -69,20 +71,16 @@ InputTranche1 <- function(config) {
 #'
 #' @examples InputGeomac('./config/Geomac.R')
 InputGeomac <- function(config) {
-  #   # Required packages
-  #   library(rgdal)
-  #   library(rgeos)
-  #   library(dplyr)
 
   # Load configuration
-  source(config)
+  source(config, local = TRUE)
 
-  # Load shapefile
-  raw.shapes <- rgdal::readOGR(inpath, inname)
-
-  # Union to find intersections (will need to fix topology first)
-  bad.geoms <- rgeos::gIsValid(raw.shapes, byid=TRUE)
-  shapes <- raw.shapes[bad.geoms==TRUE,]
+  # load shapefile, find and clean bad shapes
+  shapes <- rgdal::readOGR(inpath, inname)
+  good.geoms <- rgeos::gIsValid(shapes, byid=TRUE)
+  if (any(good.geoms==FALSE)) {
+    shapes <- cleangeo::clgeo_Clean(shapes)
+  }
 
   # need to recalculate IDs to get code below to work (we need id == rownumber)
   n <- length(slot(shapes, 'polygons'))
@@ -245,10 +243,12 @@ ProcessTranche1 <- function(inputs) {
   for (x in 1:n.combos) {
     dups <- ints[[x]][,1]
     dup.polys <- length(dups)
-    for (y in 1:dup.polys) {
-      toss$dataset[i] <- pairs[x,2]
-      toss$dup.id[i] <- dups[[y]]
-      i <- i+1
+    if (dup.polys > 0) {  # Added this conditional, not sure if correct
+      for (y in 1:dup.polys) {
+        toss$dataset[i] <- pairs[x,2]
+        toss$dup.id[i] <- dups[[y]]
+        i <- i+1
+      }
     }
   }
 
@@ -285,7 +285,7 @@ ProcessTranche1 <- function(inputs) {
   # Merge together and write to shapefile
   # Recalculate merged sf_id values (from sfUtils.R)
   newIDs <- mapply(make_sf_id, datasets.no.dups, ds.index, 1)
-  merged <- do.call(rbind, newIDs)
+  merged <- do.call(rbind.SpatialPolygonsDataFrame, newIDs)
 
   # change the sf_id to the rownames
   merged@data$sf_id <- row.names(merged)
