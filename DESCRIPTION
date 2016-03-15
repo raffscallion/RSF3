@@ -1,11 +1,17 @@
 Package: RSF3
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1
+Title: Algorithms for Processing Fire Activity Data
+Version: 0.0.0.9000
 Date: 2016-03-09
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Authors@R: person("Sean", "Raffuse", email = "sraffuse@ucdavis.edu",
+                  role = c("aut", "cre"))
+Description: A implementation of the SmartFire fire activity processing and
+    and reconciliation algorithms in R.
+License: GPL-2
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Imports:
+    dplyr,
+    rgdal,
+    rgeos,
+    sp

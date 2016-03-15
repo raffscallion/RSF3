@@ -3,6 +3,48 @@
 #  Helper Functions for the SF algorithms
 #
 
+
+#' MergeTranches
+#'
+#' Concatenates two tranches.
+#'
+#' @param X SPDF the first tranche to concatenate
+#' @param Y SPDF the second tranche to concatenate
+#'
+#' @return SPDF A merged SPDF containing both sets
+#' @export
+#'
+#' @examples MergeTranches(T1, T2)
+MergeTranches <- function(X, Y) {
+
+  # populate spids with sf_id
+  X <- sp::spChFIDs(X, X$sf_id)
+  Y <- sp::spChFIDs(Y, Y$sf_id)
+
+  # Merge, IDs must be unique
+  merged.polys <- maptools::spRbind(X, Y)
+}
+
+#' SubsetByState
+#'
+#' Takes a spatial data frame and returns a spatial data frame subsetted by the desired US state
+#'
+#' @param spd A spatial data frame (points or polygons)
+#' @param state character The full state name (e.g., 'California')
+#'
+#' @return spd
+#' @export
+#'
+#' @examples SubsetByState(geomac, 'CA')
+SubsetByState <- function(spd, state) {
+  # Load the state data and subset
+  states <- rgdal::readOGR(dsn = './SupportData', layer = 'states_counties', stringsAsFactors = FALSE)
+  states <- states[states$STATE_NAME == state,]
+  # Subset the spatial data by the state
+  states <- sp::spTransform(states, sp::CRS(sp::proj4string(spd)))
+  spd <- spd[states,]
+}
+
 # Unify sf_id for this Tranche
 make_sf_id <- function(SPDF, ds, Tranche) {
   pref <- paste0("T", as.character(Tranche), "_", as.character(ds))
@@ -96,6 +138,15 @@ clusterFootprints <- function(poly.data) {
 
   return(multi)
 
+}
+
+# Convert a SpatialPolygonsDataFrame to a SpatialPointsDataFrame
+ConvertPolyToPoint <- function(SPDF) {
+  centroids <- coordinates(SPDF)
+  df <- SPDF@data
+  proj <- SPDF@proj4string@projargs
+  points <- sp::SpatialPointsDataFrame(coords=centroids, data=df,
+                                       proj4string=sp::CRS(proj), match.ID=FALSE)
 }
 
 # Frustratingly, native ifelse function makes dates lose their classes,

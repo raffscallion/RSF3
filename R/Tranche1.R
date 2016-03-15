@@ -1,6 +1,7 @@
-#' CleanPolygons
+#' InputTranche1
 #'
-#' Prepares generic polygon data for use in Tranche 1 (or elsewhere).  It does the following:
+#' Prepares generic polygon data for use in Tranche 1 (or elsewhere).  Formerly known as CleanPolygons.R
+#' It does the following:
 #' 1) Eliminate bad topologies
 #' 2) Convert to the common projection
 #' 3) Add the common SF fields
@@ -12,8 +13,8 @@
 #'
 #' @import dplyr
 #'
-#' @examples CleanPolygons('./config/MN_RX.R')
-CleanPolygons <- function(config) {
+#' @examples InputTranche1('./config/MN_RX.R')
+InputTranche1 <- function(config) {
 
   # Get the config info for this data source
   source(config)
@@ -159,11 +160,14 @@ InputGeomac <- function(config) {
   # Perhaps will also add common fields here
   # Add ID as a key for joining
   shapes.final$ID <- as.character(row.names(shapes.final))
+  master.df <- mutate(master.df, ID = as.character(ID))
 
-  # Add the first.date and everything else in master.df (see http://stackoverflow.com/questions/3650636/how-to-attach-a-simple-data-frame-to-a-spatialpolygondataframe-in-r)
-  shapes.final@data <- data.frame(shapes.final@data, master.df[match(shapes.final@data[,'ID'], master.df[,'ID']),])
+#   # Add the first.date and everything else in master.df (see http://stackoverflow.com/questions/3650636/how-to-attach-a-simple-data-frame-to-a-spatialpolygondataframe-in-r)
+#   shapes.final@data <- data.frame(shapes.final@data, master.df[match(shapes.final@data[,'ID'], master.df[,'ID']),])
+  ## This doesn't seem to be working, try dplyr::innner_join
+  shapes.final@data <- inner_join(shapes.final@data, master.df, by = 'ID')
 
-  # Recalculate IDs (shouldn't need to do this)
+    # Recalculate IDs (shouldn't need to do this)
   n <- length(slot(shapes.final, 'polygons'))
   shapes.final <- sp::spChFIDs(shapes.final, as.character(1:n))
 
@@ -173,12 +177,12 @@ InputGeomac <- function(config) {
   # Put in the standard sf fields
   shapes.proj@data <- mutate_(shapes.proj@data,
                               sf_area = AREA,
-                              sf_start = START,
                               sf_end = END,
                               sf_type = TYPE,
                               sf_name = NAME,
                               sf_source = SOURCE,
-                              sf_id = ID)
+                              sf_id = ID) %>%
+    mutate(sf_start = as.Date(first.date))
 
   return(shapes.proj)
 
@@ -200,6 +204,7 @@ InputGeomac <- function(config) {
 #' @return SPDF
 #' @export
 #' @import dplyr
+#' @import sp
 #'
 #' @examples ProcessTranche1(list(MN_WF, MN_RX, GeoMacProcessed))
 ProcessTranche1 <- function(inputs) {
