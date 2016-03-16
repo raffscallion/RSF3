@@ -207,6 +207,7 @@ InputGeomac <- function(config) {
 #' @examples ProcessTranche1(list(MN_WF, MN_RX, GeoMacProcessed))
 ProcessTranche1 <- function(inputs) {
 
+
   # Look for intersecting polygons across all layers two at a time (Magic!)
   combos <- combn(inputs, 2, function(x) rgeos::gIntersects(x[[1]],x[[2]], byid=TRUE), simplify=FALSE)
   ints <- lapply(combos, which, arr.ind=TRUE)
@@ -243,10 +244,10 @@ ProcessTranche1 <- function(inputs) {
   for (x in 1:n.combos) {
     dups <- ints[[x]][,1]
     dup.polys <- length(dups)
-    if (dup.polys > 0) {  # Added this conditional, not sure if correct
+    if (dup.polys > 0) {
       for (y in 1:dup.polys) {
         toss$dataset[i] <- pairs[x,2]
-        toss$dup.id[i] <- dups[[y]]
+        toss$dup.id[i] <- inputs[[pairs[x,2]]]$sf_id[dups[y]]
         i <- i+1
       }
     }

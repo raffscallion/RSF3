@@ -21,7 +21,7 @@ InputTranche2 <- function(config, T1) {
   m2.per.acre <- 4046.856
 
   # Load the configuration for this input
-  source(config)
+  source(config, local = TRUE)
 
   # Get points
   input.file <- paste0(inpath, inname)
@@ -220,7 +220,7 @@ ProcessTranche2 <- function(inputs) {
   # Merge together and write to shapefile
   #source('./Code/sfUtils.R')
   newIDs<-mapply(make_sf_id, datasets.no.dups, ds.index, 2)
-  merged <- do.call(rbind, newIDs)
+  merged <- do.call(rbind.SpatialPolygonsDataFrame, newIDs)
 
   # change the sf_id to the rownames
   merged@data$sf_id <- as.character(row.names(merged))

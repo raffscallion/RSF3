@@ -23,7 +23,7 @@ InputHMS <- function(config, T1T2) {
   m2.per.acre <- 4046.856
 
   # Load configuration
-  source(config)
+  source(config, local = TRUE)
 
 #   # Required packages
 #   library(rgdal)
