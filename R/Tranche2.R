@@ -86,8 +86,6 @@ InputTranche2 <- function(config, T1) {
   unmatched <- points[ints.collapse == 0,]
   matched <- points[ints.collapse > 0,]
 
-#   # We should capture these matched IDs for later processing or joining with final data
-#   writeOGR(matched, paste(output.path,'matched',sep='/'), paste0(input.name, '_matched') , 'ESRI Shapefile')
 #
   # Turn unmatched data into polygons, using the area field to determine size
   buffer.sizes <- ((unmatched$sf_area * m2.per.acre)/pi)^0.5
