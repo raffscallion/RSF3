@@ -1,8 +1,8 @@
 Package: RSF3
 Type: Package
 Title: Algorithms for Processing Fire Activity Data
-Version: 0.0.0.9002
-Date: 2016-03-09
+Version: 0.0.0.9003
+Date: 2017-01-03
 Authors@R: person("Sean", "Raffuse", email = "sraffuse@ucdavis.edu",
                   role = c("aut", "cre"))
 Description: A implementation of the SmartFire fire activity processing and
@@ -16,3 +16,6 @@ Imports:
     rgdal,
     rgeos,
     sp
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
