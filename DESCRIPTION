@@ -1,7 +1,7 @@
 Package: RSF3
 Type: Package
 Title: Algorithms for Processing Fire Activity Data
-Version: 0.0.0.9003
+Version: 0.0.0.9004
 Date: 2017-01-03
 Authors@R: person("Sean", "Raffuse", email = "sraffuse@ucdavis.edu",
                   role = c("aut", "cre"))
