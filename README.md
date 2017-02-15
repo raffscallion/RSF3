@@ -24,13 +24,14 @@ The following list outlines the general steps used to create a reconciled fire a
 1. Identify all input data sets as either tranche 1, 2, or 3. Tranche 1 data should be in ESRI Shapefile format. Tranches 2 and 3 should be CSV files.
 2. Create configuration files for each input data set (see next section).
 3. Run `InputTranche1` for each tranche 1 data set. This puts all of the data sets into a common format for further processing. Note that data from Geomac require special preprocessing and `InputGeomac` is run instead of `InputTranche1`.
-4. Run `ProcessTranche1` to merge all tranche 1 data sets into a single output *T1*.
-5. Run `InputTranche2` for each tranche 2 data set.
-6. Run `ProcessTranche2` to merge all tranche 2 data sets into a single output *T2*.
+4. Run `ProcessTranche` to merge all tranche 1 data sets into a single output *T1*.
+5. Run `InputTranche2` for each tranche 2 data set. *T1* will be used as input to each.
+6. Run `ProcessTranche` to merge all tranche 2 data sets into a single output *T2*.
 7. Run `MergeTranches` to combine *T1* and *T2* into *T1.T2*.
-8. Run `InputHMS` to create tranche 3 (*T3*). Note that HMS is the only supported tranche 3 data set at the time of writing.
-9. Run `MergeTranches` to combine *T1.T2* and *T3* into the final result.
-10. Save the final result as a shapefile for use in other applications using `writeOGR`.
+8. Run `InputTranche3` for each tranche 2 data set. *T1.T2* will be used as input to each. Note that `InputHMS` should be used on HMS data.
+9. Run `ProcessTranche` to merge all tranche 3 data sets into a single output *T3*.
+10. Run `MergeTranches` to combine *T1.T2* and *T3* into the final result.
+11. Save the final result as a shapefile for use in other applications using `writeOGR`.
 
 ### Configuration Files
 
