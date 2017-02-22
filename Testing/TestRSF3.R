@@ -4,7 +4,6 @@ library(RSF3)
 
 ## Tranche 1
 mtbs <- InputTranche1('./config/MTBS.R')
-mtbs <- readRDS('mtbs.RDS')
 mtbs <- SubsetByState(mtbs, 'Minnesota')
 geomac <- InputGeomac('./config/GeoMac.R')
 geomac <- SubsetByState(geomac, 'Minnesota')
