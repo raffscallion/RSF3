@@ -256,7 +256,7 @@ InputTranche3 <- function(config, T1T2) {
   coords["id"] <- seq(from=1, to=length(coords[,1]))
 
   #Apply the square function on the array using apply (making slightly larger than nominal to minimize gaps)
-  square.half.length <- (PIXEL.RESOLUTION / 2) + 20
+  square.half.length <- (PIXEL.RESOLUTION / 2) + 5
   polys <- apply(coords, 1, squarePolygon, square.half.length)
   # wrap into a polygons, and then spatialpolygons object
   sps <- sp::SpatialPolygons(polys)
@@ -265,22 +265,21 @@ InputTranche3 <- function(config, T1T2) {
   # now we can attach the original data to the polygons
   spdf <- sp::SpatialPolygonsDataFrame(sps, unmatched@data, match.ID=FALSE)
 
-  # Now buffer into clusters, finding min and max date
-  clustered <- clusterFootprints(spdf)
-  # clusterFootprints returns fake polygons where holes should be. These can be
-  # detected and removed because the data attributes are NA
-  clustered <- clustered[!is.na(clustered$sf_source),]
+  # Move clustering to the end
+  # # Now buffer into clusters, finding min and max date
+  # clustered <- clusterFootprints(spdf)
+  # # clusterFootprints returns fake polygons where holes should be. These can be
+  # # detected and removed because the data attributes are NA
+  # clustered <- clustered[!is.na(clustered$sf_source),]
+  #
 
+  ### 3) Rescale all T3 fires Combine T1_T2 polys and T3 fires into one point pattern
+  #object (ppp) with marks for the polygon area and NA for pixel area, then calculate
+  #nearest neighbor area for each - this will give the new areas for the satellite data
+  #for rescaling
 
-  ### 3) Rescale single-pixel fires
-  # Combine T1_T2 polys and single-pixel fires into one point pattern object (ppp)
-  # with marks for the polygon area and NA for pixel area, then calculate nearest neighbor
-  # area for each - this will give the new areas for the satellite data for rescaling
-
-  # Split into single pixel and multi-pixel fires
-  single.pixel.size <- (((square.half.length * 2)^2) / m2.per.acre) + 1 # adding 1 just in case
-  single.pixels <- clustered[clustered@data$sf_area <= single.pixel.size,]
-  multi.pixel  <- clustered[!clustered@data$sf_area <= single.pixel.size,]
+  # # Split into single pixel and multi-pixel fires
+  single.pixel.size <- (((PIXEL.RESOLUTION)^2) / m2.per.acre)
 
   # Convert polys to a df for ppp (X, Y, area)
   prepPPP <- function(points) {
@@ -292,9 +291,8 @@ InputTranche3 <- function(config, T1T2) {
   }
 
   t.points <- ConvertPolyToPoint(T1T2)
-  # t.points <- sp::spTransform(t.points, CRS=sp::CRS(proj))
   t.points <- prepPPP(t.points)
-  sat.points <- ConvertPolyToPoint(single.pixels)
+  sat.points <- ConvertPolyToPoint(spdf)
   sat.points <- prepPPP(sat.points)
   sat.points$sf_area <- NA
   points.ppp <- rbind(sat.points, t.points)  # put satellite first so they are easier to pull out
@@ -307,12 +305,9 @@ InputTranche3 <- function(config, T1T2) {
   window <- spatstat::as.owin(c(x.min, x.max, y.min, y.max))
   ppp <- spatstat::as.ppp(points.ppp, W=window)
 
-  # # Calculate the median size of all fires within a 50 km neighborhood
-  # median.size <- spatstat::markstat(ppp, median, R=50000, na.rm=TRUE)
-
   # Calculate the median size of the 10 nearest fires
   median.size <- spatstat::markstat(ppp, median, N=10, na.rm=TRUE)
-  # Grab only the medians for HMS data
+  # Grab only the medians for T3 data
   median.size <- median.size[1:length(sat.points$lon)]
 
   # Where median size is not NA and < single pixels size, replace current value
@@ -320,7 +315,8 @@ InputTranche3 <- function(config, T1T2) {
                          ifelse(!is.na(median.size) & median.size < single.pixel.size,
                                 median.size,
                                 NOMINAL.SIZE))
-  # Now need to recreate the single pixel fires as polygons and merge with the multi-pixel
+
+  # Now need to recreate fires as polygons
   # Calculate the square half length (in meters) for passing to the squarePolygon function
   sat.points <- mutate(sat.points, square.half = ((sf_area * m2.per.acre)^0.5)/2,
                        id = row_number())
@@ -330,17 +326,20 @@ InputTranche3 <- function(config, T1T2) {
   sps <- SpatialPolygons(polys)
   # add the projection definition
   proj4string(sps) = sp::CRS(proj4string(points))
-  # now we can attach the original data to the polygons and combine with clusters
-  df <- single.pixels@data
+  # now we can attach the original data to the polygons
+  df <- unmatched@data
   df$sf_area <- sat.points$sf_area
   spdf <- sp::SpatialPolygonsDataFrame(sps, df, match.ID=FALSE)
 
-  # Need to create unique ids to combine the two data sets
-  n.clusters <- length(multi.pixel$sf_id)
-  multi.pixel <- sp::spChFIDs(multi.pixel, as.character(seq(1, n.clusters)))
-  n.pixels <- length(spdf$sf_id)
-  spdf <- sp::spChFIDs(spdf, as.character(seq(n.clusters+1, n.clusters+n.pixels)))
-  final <- maptools::spRbind(multi.pixel, spdf)
+  # Create clusters
+  clustered <- clusterFootprints(spdf)
+
+  # # Need to create unique ids to combine the two data sets
+  # n.clusters <- length(multi.pixel$sf_id)
+  # multi.pixel <- sp::spChFIDs(multi.pixel, as.character(seq(1, n.clusters)))
+  # n.pixels <- length(spdf$sf_id)
+  # spdf <- sp::spChFIDs(spdf, as.character(seq(n.clusters+1, n.clusters+n.pixels)))
+  # final <- maptools::spRbind(multi.pixel, spdf)
 
   #   # Write output as shapefile and RDS
   #   writeOGR(final, output.path, paste(input.name, 'Tranche3', sep='_'), 'ESRI Shapefile')
