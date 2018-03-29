@@ -2,7 +2,7 @@
 # VIIRS i-band
 
 input.name <- 'VIIRS-i'  # A friendly name for metadata and the output name
-inname <- "VIIRS_i_2015_MN.txt"
+inname <- "VIIRS_i_2015_MN_noAg.txt"
 inpath <- "./InputData/VIIRS_I/"
 outpath <- './FinalData/Tranche3'
 
@@ -23,7 +23,7 @@ columns <- c(NA, NA, NA, NA, NA, 'numeric', 'numeric', NA, NA, NA, NA, NA, NA, N
 coord.fields <- c("LONG", "LAT")
 
 # Size (in acres) to assume for a pixel in the absence of anything else
-NOMINAL.SIZE = 50
+NOMINAL.SIZE = 35 # just larger than nadir resolution (30.27 acres)
 
 # Nominal nadir pixel resolution (in meters)
 PIXEL.RESOLUTION <- 350

@@ -1,7 +1,7 @@
 # SF Configuration file
 
 input.name <- 'HMS'  # A friendly name for metadata and the output name
-inname <- "HMS_2011_MN.csv"
+inname <- "HMS_2011_MN_noAg.csv"
 inpath <- "./InputData/HMS/"
 outpath <- './FinalData/Tranche3'
 
@@ -18,7 +18,7 @@ SOURCE <- "'HMS'"
 
 # Point data (csv) specific parameters
 within.distance <- 3000   # Distance in meters considered associated with the primary poly (should relate to spatial uncertainty)
-columns <- c('numeric', 'numeric', NA, NA, NA, NA, NA)
+columns <- c('numeric', 'numeric', NA, NA, NA, NA, NA, NA, NA, NA)
 coord.fields <- c("Lon", "Lat")
 
 # Size (in acres) to assume for a pixel in the absence of anything else
