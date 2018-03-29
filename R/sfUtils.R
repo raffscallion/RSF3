@@ -4,6 +4,28 @@
 #
 
 
+### This doesn't work at all yet
+PrepForBlueSky <- function(spdf) {
+  hms <- readRDS('../SmallFires/hms_processed_2014.RDS')
+
+  longitude <- coordinates(spdf)[,1]
+  latitude <- coordinates(spdf)[,2]
+
+  bsp.in <- spdf@data %>%
+    mutate(id = row_number(),
+           type = 'RX',
+           area = 226,
+           start = format(as.Date(strptime(YearDay, format='%Y%j')), '%Y%m%d'))
+
+  bsp.in$latitude <- latitude
+  bsp.in$longitude <- longitude
+  bsp.in <- select(bsp.in, id, latitude, longitude, type, area, start)
+
+  write.csv(bsp.in, 'C:/Users/sraffuse/Google Drive/Working/RSmartFire/bspipe/ga-hms-rx.csv',
+            row.names = FALSE, quote = FALSE)
+}
+
+
 #' MergeTranches
 #'
 #' Concatenates two tranches.
@@ -91,13 +113,14 @@ ProcessTranche <- function(inputs, tranche) {
   }
 
 
-  # Now for each candidate intersection, check to see if they intersect in time (or are close?)
+  # Now for each candidate intersection, check to see if they intersect in time (or are
+  # close?). Making dates relatively relaxed (within 12 days) to deal with bad data
   checkDates <- function(ds1, id1, ds2, id2) {
     start1 <- inputs[[ds1]][id1,]$sf_start
     end1 <- inputs[[ds1]][id1,]$sf_end
     start2 <- inputs[[ds2]][id2,]$sf_start
     end2 <- inputs[[ds2]][id2,]$sf_end
-    if ((abs(start1 - start2) < 3) | (abs(end1 - end2) < 3)) {
+    if ((abs(start1 - start2) < 12) | (abs(end1 - end2) < 12)) {
       return(TRUE)
     } else return(FALSE)
   }
@@ -109,8 +132,8 @@ ProcessTranche <- function(inputs, tranche) {
   # Remove conflicting polygons from each dataset
   ds.index <- seq(1:n.datasets)
   removeConflicts <- function(x, y) {
-    toss.1 <- filter(toss, ds2 == y) %>%
-      mutate(sf_id = as.character(dup.id2))
+    toss.1 <- filter(toss, ds2 == y) #%>%
+    toss.1$sf_id <- x@data$sf_id[toss.1$dup.id2]
     to.keep <- anti_join(x@data, toss.1, by='sf_id') %>%
       arrange(sf_id)
     to.keep.v <- unlist(to.keep$sf_id)
@@ -158,6 +181,30 @@ SubsetByState <- function(spd, state) {
   # Subset the spatial data by the state
   states <- sp::spTransform(states, sp::CRS(sp::proj4string(spd)))
   spd <- spd[states,]
+}
+
+#' RemoveAgFires Takes a spatial data set and removes all features that overlap with
+#' 'Crops' from the USDA NASS Cropland Data Layer.  Crop types are coded as 1-61, 66-77,
+#' and 204-.  The user must provide the tif file acquired from
+#' https://nassgeodata.gmu.edu/CropScape/.
+#'
+#' @param cropfile filename The full path name of a tif file of cropland data
+#' @param SPDF SPDF the spatial data set to extract features from
+#'
+#' @return SPDF the same spatial data set as input but with cropland area features removed
+#' @export
+#'
+#' @examples hms <- RemoveAgFires(hms, '../../GIS Data/CDL_2015_clip_20160407194453_1862402256.tif')
+RemoveAgFires <- function(SPDF, cropfile) {
+  # load the crop map
+  crops <- raster::raster(cropfile)
+  # Assign crop type
+  ex <- raster::extract(crops, SPDF)
+  SPDF@data$CropType <- ex
+  # Crop types are 1-61, 66-77, 204-
+  types <- read.csv('./SupportData/CropScape_2015_Stats.csv', stringsAsFactors = FALSE)
+  SPDF@data <- left_join(SPDF@data, types, by = c('CropType'='Value'))
+  SPDF[SPDF$AgLand==0,]
 }
 
 # Unify sf_id for this Tranche
