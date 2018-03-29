@@ -189,9 +189,9 @@ InputGeomac <- function(config) {
                               sf_end = END,
                               sf_type = TYPE,
                               sf_name = NAME,
-                              sf_source = SOURCE,
-                              sf_id = ID) %>%
+                              sf_source = SOURCE) %>%
     mutate(sf_start = as.Date(first.date))
+  shapes.proj$sf_id <- as.character(row.names(shapes.proj))
 
   return(shapes.proj)
 
