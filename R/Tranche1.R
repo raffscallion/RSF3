@@ -81,7 +81,7 @@ InputGeomac <- function(config) {
   source(config, local = TRUE)
 
   # load shapefile, find and clean bad shapes
-  shapes <- rgdal::readOGR(inpath, inname)
+  shapes <- rgdal::readOGR(inpath, inname, stringsAsFactors = FALSE)
   good.geoms <- rgeos::gIsValid(shapes, byid=TRUE)
   if (any(good.geoms==FALSE)) {
     ### This doesn't seem to work anymore
@@ -90,6 +90,7 @@ InputGeomac <- function(config) {
     ## Instead, employ the well known R/GEOS hack to deal with bad polygons
     #fix <- rgeos::gSimplify(shapes, tol = 0.00001)
     shapes <- rgeos::gBuffer(shapes, byid = TRUE, width = 0)
+    shapes@data <- rename(shapes@data, fire_name = !! NAMEFIELD)
 
   }
 
@@ -101,7 +102,7 @@ InputGeomac <- function(config) {
   # in proper date format
   d <- shapes@data %>%
     mutate(ID = as.numeric(rownames(as(shapes, "data.frame"))),
-           end.date = as.Date(date_))
+           end.date = as.Date(!! DATEFIELD))
 
   # 1. find all names with more than one record
   conflicts <- group_by(d, fire_name) %>%
